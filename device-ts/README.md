@@ -13,3 +13,4 @@ https://khalilstemmler.com/blogs/typescript/node-starter-project/
 4. npx tsc
 5. node build/index.js
 6. Open web console http://localhost:3000
+7. index.html is not automatically copied to build folder yet! -> just copy paste from src
