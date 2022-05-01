@@ -48,8 +48,10 @@ export function addComponent(name: string) {
 
 // Realm object change listener
 function changedPropertiesListener(object: any, changes: any) {
-  console.log("Object: " + JSON.stringify(object));
-  console.log("Changes: " + JSON.stringify(changes));
+  changes.changedProperties.forEach((propName: string) => {
+    console.log(propName);
+    console.log(`Property value: ${object[propName]}`);
+  });
 }
 
 // Realm collection change listener
@@ -58,9 +60,8 @@ const changeListener = (
   changes: any) => {
   // Handle newly added objects
   changes.insertions.forEach((index: number) => {
-    //const object: Realm.Object<Device> = objects[index];
     console.log(`New object added: ${objects[index].name}!`);
-    //objects[0].addListener(changedPropertiesListener);
+    objects[0].addListener(changedPropertiesListener);
   });
   console.log(JSON.stringify(objects));
 }
@@ -97,8 +98,8 @@ async function run() {
       );
     });
     // Add change listener to filtered list of objects
-    //realm.objects<Device>('Device').addListener(changeListener);
-    //realm.objects('Component').addListener(changeListener);
+    realm.objects('Device').addListener(changeListener);
+    realm.objects('Component').addListener(changeListener);
   }).catch((err) => {
     console.log('Login failed: ', err)
   });

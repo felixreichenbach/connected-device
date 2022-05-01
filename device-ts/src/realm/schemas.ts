@@ -1,14 +1,13 @@
 import { ObjectId } from 'bson';
-import Realm from "realm";
 
-export class Device {
-
+export class Device { //extends Realm.Object {
+    
     public _id = new ObjectId;
     public name = "";
     public owner_id = "";
     public components: Array<Component> = [];
 
-    public static schema: Realm.ObjectSchema = {
+    public static schema = {//: Realm.ObjectSchema = {
         name: 'Device',
         primaryKey: '_id',
         properties: {
